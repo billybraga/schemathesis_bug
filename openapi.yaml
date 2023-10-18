@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: schemathesis bug
+  version: 1.0.0
+servers:
+  - url: 'https://example.com'
+tags:
+  - name: tag
+paths:
+  /pet:
+    get:
+      tags:
+        - tag
+      summary: Query with form style and explode:true
+      operationId: query
+      parameters:
+        - name: request
+          in: query
+          required: true
+          style: form
+          schema:
+            $ref: '#/components/schemas/Request'
+          explode: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                result: string
+components:
+  schemas:
+    Request:
+      type: object
+      properties:
+        prop1:
+          type: string
+        flag1:
+          type: boolean
